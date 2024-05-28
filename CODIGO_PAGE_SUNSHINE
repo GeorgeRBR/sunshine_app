@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Sensor de temperatura - By Parzibyte</title>
+    <link rel='stylesheet' href='https://unpkg.com/bulma@0.9.1/css/bulma.min.css'>
+    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <style>
+        .hero-body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .columns {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <section id='app' class='hero is-link is-fullheight'>
+        <div class='hero-body'>
+            <div class='container'>
+                <div class='columns has-text-centered'>
+                    <div class='column'>
+                        <h1 style='font-size: 2.5rem'>SUNSHINE</h1>
+                        <i class='fa fa-thermometer-half' style='font-size: 4rem;'></i>
+                    </div>
+                </div>
+                <div class='columns'>
+                    <div class='column has-text-centered'>
+                        <h2 class='is-size-4 has-text-warning'>Temperatura</h2>
+                        <h2 id='temperatura' class='is-size-1'>26.5 °C</h2>
+                    </div>
+                    <div class='column has-text-centered'>
+                        <h2 class='is-size-4 has-text-warning'>Humedad</h2>
+                        <h2 id='humedad' class='is-size-1'>43.87 %</h2>
+                    </div>
+                </div>
+                <div class='columns'>
+                    <div class='column'>
+                        <p>Última lectura: Hace <strong id='ultimo' class='has-text-white'>5</strong> segundo(s)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function actualizarValores() {
+            // Simula la obtención de nuevos valores de temperatura y humedad.
+            const nuevaTemperatura = (Math.random() * 1 + 24).toFixed(2); // Entre 26 y 27 grados
+            const nuevaHumedad = (Math.random() * 1 + 30).toFixed(2); // Entre 43 y 44 %
+
+            // Actualiza los valores en el DOM.
+            document.getElementById('temperatura').innerText = `${nuevaTemperatura} °C`;
+            document.getElementById('humedad').innerText = `${nuevaHumedad} %`;
+
+            // Reinicia el tiempo de la última lectura.
+            document.getElementById('ultimo').innerText = '0';
+        }
+
+        function actualizarTiempo() {
+            const ultimo = document.getElementById('ultimo');
+            let segundos = parseInt(ultimo.innerText);
+            ultimo.innerText = (segundos + 1).toString();
+        }
+
+        // Actualiza los valores cada 5 segundos.
+        setInterval(actualizarValores, 5000);
+
+        // Actualiza el tiempo cada segundo.
+        setInterval(actualizarTiempo, 1000);
+    </script>
+</body>
+
+</html>
